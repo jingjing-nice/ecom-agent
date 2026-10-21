@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.venv-*/
+venv/
+.env
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 日志与容器数据
+logs/
+docker/postgres_data/
+docker/redis_data/
+docker/neo4j_data/
+docker/neo4j_logs/
+docker/minio_data/
+
+# 评测报告（运行时产物，数据集与基线在 evals/ 下入库）
+evals/reports/
+
+# 前端
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# IDE
+.idea/
+.vscode/
+.DS_Store

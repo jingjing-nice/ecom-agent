@@ -1,0 +1,75 @@
+{
+  "request": {
+    "conversation_id": "cb905674-a957-4f1b-a8a6-56ac25f938a9",
+    "client_message_id": "e9811672398f4d7894dc5b3d93beb3b2",
+    "message": "这双鞋太小，能换42码吗？没货就推荐同品牌替代款。",
+    "order_item_id": "f9e0f2f4-4185-4859-a22f-5bb77a3e3e65",
+    "target_size": "42",
+    "budget_minor": 50000
+  },
+  "events": [
+    {
+      "event": "message.accepted",
+      "elapsed_ms": 5,
+      "data": {
+        "event_id": "401d45378d52428aaf114f7cff847915",
+        "trace_id": "a39ff5d859fc41d9",
+        "client_message_id": "e9811672398f4d7894dc5b3d93beb3b2"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 12304,
+      "data": {
+        "event_id": "b1cdb083b0084818bf787f99de51cd95",
+        "trace_id": "a39ff5d859fc41d9",
+        "agent": "aftersale",
+        "tool": "get_owned_order",
+        "duration_ms": 27,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 16644,
+      "data": {
+        "event_id": "2289816b05dc45f9a0b9bba43e0ca005",
+        "trace_id": "a39ff5d859fc41d9",
+        "agent": "aftersale",
+        "tool": "check_inventory",
+        "duration_ms": 14,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 16647,
+      "data": {
+        "event_id": "cec8fbe5576b4b07954c6c0e22b6cfea",
+        "trace_id": "a39ff5d859fc41d9",
+        "agent": "aftersale",
+        "tool": "retrieve_policy",
+        "duration_ms": 488,
+        "status": "failed"
+      }
+    },
+    {
+      "event": "error",
+      "elapsed_ms": 16651,
+      "data": {
+        "event_id": "2de3af5e22c24d8eaeba23d8f10a21e7",
+        "trace_id": "a39ff5d859fc41d9",
+        "message": "任务处理失败，请稍后重试",
+        "error_code": "internal_error",
+        "retryable": true
+      }
+    }
+  ],
+  "answer": null,
+  "latency_ms": 16652,
+  "first_delta_ms": null,
+  "true_model_routing": false,
+  "passed": false,
+  "name": "aftersale_handoff",
+  "wall_ms": 16667
+}

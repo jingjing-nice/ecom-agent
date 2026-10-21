@@ -1,0 +1,41 @@
+# 无需下载新镜像的本地演示基础设施；API/Worker/Web 在宿主机运行。
+# 使用独立命名卷，不修改完整版 PostgreSQL 17 数据目录。
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    pull_policy: never
+    environment:
+      POSTGRES_USER: ecom
+      POSTGRES_PASSWORD: ecom123
+      POSTGRES_DB: ecom_db
+    ports: ['5433:5432']
+    volumes:
+      - demo-postgres16:/var/lib/postgresql/data
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ecom -d ecom_db']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    pull_policy: never
+    ports: ['6380:6379']
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  minio:
+    image: minio/minio:RELEASE.2024-12-18T13-15-44Z
+    pull_policy: never
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ':9001'
+    ports: ['9100:9000', '9101:9001']
+    volumes:
+      - demo-minio:/data
+volumes:
+  demo-postgres16:
+  demo-minio:

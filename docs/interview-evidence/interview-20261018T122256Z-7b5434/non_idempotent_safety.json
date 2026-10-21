@@ -1,0 +1,118 @@
+{
+  "passed": true,
+  "mode": "real PostgreSQL + real API + injected sandbox adapter; no real platform writes",
+  "supports_idempotency": false,
+  "stable_request_no": "REQ-8e605684b1104aefb3d9572cfe37697b",
+  "calls": [
+    {
+      "operation": "create",
+      "request_no": "REQ-8e605684b1104aefb3d9572cfe37697b",
+      "case_id": "8e605684b1104aefb3d9572cfe37697b",
+      "outcome": "timeout"
+    },
+    {
+      "operation": "probe",
+      "request_no": "REQ-8e605684b1104aefb3d9572cfe37697b",
+      "outcome": "missing"
+    }
+  ],
+  "snapshots": [
+    {
+      "case": {
+        "id": "8e605684-b110-4aef-b3d9-572cfe37697b",
+        "case_no": "AS-97c76e58a4d547aa878a47ea5e548250",
+        "status": "UNKNOWN",
+        "version": 8,
+        "case_type": "refund",
+        "reason": "面试沙箱超时恢复演练",
+        "order_item_id": "5470d930-7933-47c5-8823-4027cc021fbd",
+        "policy_version": "interview-v1",
+        "draft": {
+          "message": "申请草稿，确认后由系统按已发布规则自动核验",
+          "review_mode": "automatic",
+          "requires_review": false,
+          "automatic_decision": {
+            "reason": "订单状态、期限、金额及所需凭证符合已发布规则，自动审核通过",
+            "status": "APPROVED",
+            "policy_id": "28df0669-d89b-4ead-ad83-cbb29e61a06b",
+            "rule_version": "automatic-policy-v1"
+          }
+        },
+        "external_case_id": null,
+        "review_comment": "订单状态、期限、金额及所需凭证符合已发布规则，自动审核通过",
+        "evidence_ids": [],
+        "appeal_path": null,
+        "last_error": "外部平台不支持幂等请求号，创建结果未知，需人工核对"
+      },
+      "job": {
+        "job_id": "ec694803ab354029b9d26dfa8dfbee78",
+        "status": "pending",
+        "attempts": 1,
+        "error": "外部平台不支持幂等请求号，创建结果未知，需人工核对",
+        "result": null,
+        "next_retry_at": "2026-10-18 12:23:41.268498+00:00"
+      },
+      "calls_so_far": [
+        {
+          "operation": "create",
+          "request_no": "REQ-8e605684b1104aefb3d9572cfe37697b",
+          "case_id": "8e605684b1104aefb3d9572cfe37697b",
+          "outcome": "timeout"
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "8e605684-b110-4aef-b3d9-572cfe37697b",
+        "case_no": "AS-97c76e58a4d547aa878a47ea5e548250",
+        "status": "UNKNOWN",
+        "version": 8,
+        "case_type": "refund",
+        "reason": "面试沙箱超时恢复演练",
+        "order_item_id": "5470d930-7933-47c5-8823-4027cc021fbd",
+        "policy_version": "interview-v1",
+        "draft": {
+          "message": "申请草稿，确认后由系统按已发布规则自动核验",
+          "review_mode": "automatic",
+          "requires_review": false,
+          "automatic_decision": {
+            "reason": "订单状态、期限、金额及所需凭证符合已发布规则，自动审核通过",
+            "status": "APPROVED",
+            "policy_id": "28df0669-d89b-4ead-ad83-cbb29e61a06b",
+            "rule_version": "automatic-policy-v1"
+          }
+        },
+        "external_case_id": null,
+        "review_comment": "订单状态、期限、金额及所需凭证符合已发布规则，自动审核通过",
+        "evidence_ids": [],
+        "appeal_path": null,
+        "last_error": "平台不支持幂等请求号：请人工核对外部平台后重新审批"
+      },
+      "job": {
+        "job_id": "ec694803ab354029b9d26dfa8dfbee78",
+        "status": "pending",
+        "attempts": 2,
+        "error": "外部状态尚未确认，系统暂停创建并继续核对",
+        "result": null,
+        "next_retry_at": "2026-10-18 12:23:44.848055+00:00"
+      },
+      "calls_so_far": [
+        {
+          "operation": "create",
+          "request_no": "REQ-8e605684b1104aefb3d9572cfe37697b",
+          "case_id": "8e605684b1104aefb3d9572cfe37697b",
+          "outcome": "timeout"
+        },
+        {
+          "operation": "probe",
+          "request_no": "REQ-8e605684b1104aefb3d9572cfe37697b",
+          "outcome": "missing"
+        }
+      ]
+    }
+  ],
+  "outbox_status": "pending",
+  "explanation": "超时只说明未收到响应，不说明远端未创建。必须先按稳定请求号核对；有幂等保证且确认不存在才可重发，无幂等保证保持 UNKNOWN，不盲目创建。",
+  "name": "non_idempotent_safety",
+  "wall_ms": 1972
+}

@@ -1,0 +1,931 @@
+{
+  "meta": {
+    "name": "ecom-agent 业务沙箱测试数据",
+    "generated_at": "2026-10-18T00:00:00Z",
+    "total_records": 50,
+    "tenant": "demo",
+    "notes": [
+      "所有记录按 records 数组顺序即导入顺序（表间依赖已按拓扑序排列：shops/users → 商品 → 订单 → 售后）。",
+      "用户记录不含 password_hash，导入时应以明文 Demo123! 调用 src.core.security.hash_password 生成。",
+      "ID 为固定值，可重复导入（先按 id 删除再插入即幂等）。",
+      "金额单位为分（*_minor），时间统一 UTC。",
+      "覆盖场景：未发货可自动退款、已签收退货退款需凭证、超时限被拒、缺货 SKU、已取消订单、部分退款。"
+    ]
+  },
+  "records": [
+    {
+      "table": "shops",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000c01",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "name": "栖家灯饰旗舰店",
+        "platform": "sandbox",
+        "status": "active"
+      }
+    },
+    {
+      "table": "shops",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000c02",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "name": "明居折扣店",
+        "platform": "sandbox",
+        "status": "active"
+      }
+    },
+    {
+      "table": "users",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000b01",
+        "tenant_id": "demo",
+        "email": "buyer@demo.local",
+        "display_name": "王小明",
+        "role": "buyer",
+        "shop_ids": [
+          "shop-a",
+          "shop-b"
+        ],
+        "is_active": true
+      }
+    },
+    {
+      "table": "users",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000b02",
+        "tenant_id": "demo",
+        "email": "buyer2@demo.local",
+        "display_name": "李雷",
+        "role": "buyer",
+        "shop_ids": [
+          "shop-a"
+        ],
+        "is_active": true
+      }
+    },
+    {
+      "table": "users",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000b03",
+        "tenant_id": "demo",
+        "email": "staff@demo.local",
+        "display_name": "客服小周",
+        "role": "staff",
+        "shop_ids": [
+          "shop-a",
+          "shop-b"
+        ],
+        "is_active": true
+      }
+    },
+    {
+      "table": "users",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000b04",
+        "tenant_id": "demo",
+        "email": "ops@demo.local",
+        "display_name": "运营阿哲",
+        "role": "ops",
+        "shop_ids": [
+          "shop-a",
+          "shop-b"
+        ],
+        "is_active": true
+      }
+    },
+    {
+      "table": "users",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000b05",
+        "tenant_id": "demo",
+        "email": "ka@demo.local",
+        "display_name": "知识管理员",
+        "role": "knowledge_admin",
+        "shop_ids": [],
+        "is_active": true
+      }
+    },
+    {
+      "table": "products",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000a01",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "product_id": "P0001",
+        "title": "栖家 客厅 LED 吸顶灯 简约款",
+        "brand": "栖家",
+        "category": "吸顶灯",
+        "sub_category": "客厅灯",
+        "description": "家装 LED 吸顶灯，铝合金灯体与亚克力灯罩；安装服务另行咨询。沙箱演示商品。",
+        "attributes": {
+          "颜色": "白色",
+          "适用场景": "客厅",
+          "材质": "铝合金与亚克力",
+          "光源": "LED"
+        },
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "products",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000a02",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "product_id": "P0002",
+        "title": "栖家 卧室 LED 壁灯 双只装",
+        "brand": "栖家",
+        "category": "壁灯",
+        "sub_category": "床头灯",
+        "description": "家装 LED 壁灯，铝合金灯体与亚克力灯罩；安装服务另行咨询。沙箱演示商品。",
+        "attributes": {
+          "颜色": "白色",
+          "适用场景": "卧室",
+          "材质": "铝合金与亚克力",
+          "光源": "LED"
+        },
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "products",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000a03",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "product_id": "P0003",
+        "title": "栖家 餐厅 LED 吊灯 简约款",
+        "brand": "栖家",
+        "category": "吊灯",
+        "sub_category": "餐厅吊灯",
+        "description": "家装 LED 吊灯，铝合金灯体与亚克力灯罩；安装服务另行咨询。沙箱演示商品。",
+        "attributes": {
+          "颜色": "白色",
+          "适用场景": "餐厅",
+          "材质": "铝合金与亚克力",
+          "光源": "LED"
+        },
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "products",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000a04",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "product_id": "P0004",
+        "title": "明居 餐厅 LED 装饰吊灯",
+        "brand": "明居",
+        "category": "吊灯",
+        "sub_category": "餐厅吊灯",
+        "description": "家装 LED 吊灯，铝合金灯体与亚克力灯罩；安装服务另行咨询。沙箱演示商品。",
+        "attributes": {
+          "颜色": "白色",
+          "适用场景": "餐厅",
+          "材质": "铝合金与亚克力",
+          "光源": "LED"
+        },
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "products",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000a05",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "product_id": "P0005",
+        "title": "明居 玄关 LED 感应灯",
+        "brand": "明居",
+        "category": "感应灯",
+        "sub_category": "玄关灯",
+        "description": "家装 LED 感应灯，铝合金灯体与亚克力灯罩；安装服务另行咨询。沙箱演示商品。",
+        "attributes": {
+          "颜色": "白色",
+          "适用场景": "玄关",
+          "材质": "铝合金与亚克力",
+          "光源": "LED"
+        },
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "products",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000a06",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "product_id": "P0006",
+        "title": "明居 阳台 LED 筒灯",
+        "brand": "明居",
+        "category": "筒灯",
+        "sub_category": "阳台筒灯",
+        "description": "家装 LED 筒灯，铝合金灯体与亚克力灯罩；安装服务另行咨询。沙箱演示商品。",
+        "attributes": {
+          "颜色": "白色",
+          "适用场景": "阳台",
+          "材质": "铝合金与亚克力",
+          "光源": "LED"
+        },
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "product_skus",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000901",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "product_id": "P0001",
+        "sku_id": "P0001-42",
+        "specs": {
+          "size": "42",
+          "尺寸单位": "厘米"
+        },
+        "price_minor": 35900,
+        "currency": "CNY",
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "product_skus",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000902",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "product_id": "P0002",
+        "sku_id": "P0002-F",
+        "specs": {
+          "size": "40",
+          "尺寸单位": "厘米"
+        },
+        "price_minor": 4900,
+        "currency": "CNY",
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "product_skus",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000903",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "product_id": "P0003",
+        "sku_id": "P0003-M",
+        "specs": {
+          "size": "40",
+          "尺寸单位": "厘米"
+        },
+        "price_minor": 19900,
+        "currency": "CNY",
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "product_skus",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000904",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "product_id": "P0004",
+        "sku_id": "P0004-20L",
+        "specs": {
+          "size": "40",
+          "尺寸单位": "厘米"
+        },
+        "price_minor": 12900,
+        "currency": "CNY",
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "product_skus",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000905",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "product_id": "P0005",
+        "sku_id": "P0005-700",
+        "specs": {
+          "size": "40",
+          "尺寸单位": "厘米"
+        },
+        "price_minor": 3900,
+        "currency": "CNY",
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "product_skus",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000906",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "product_id": "P0006",
+        "sku_id": "P0006-M",
+        "specs": {
+          "size": "40",
+          "尺寸单位": "厘米"
+        },
+        "price_minor": 8900,
+        "currency": "CNY",
+        "status": "on_sale"
+      }
+    },
+    {
+      "table": "inventory_snapshots",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000801",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "sku_id": "P0001-42",
+        "available_qty": 35,
+        "source_version": 1,
+        "observed_at": "2026-10-18T02:00:00Z"
+      }
+    },
+    {
+      "table": "inventory_snapshots",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000802",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "sku_id": "P0002-F",
+        "available_qty": 120,
+        "source_version": 1,
+        "observed_at": "2026-10-18T02:00:00Z"
+      }
+    },
+    {
+      "table": "inventory_snapshots",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000803",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "sku_id": "P0003-M",
+        "available_qty": 8,
+        "source_version": 1,
+        "observed_at": "2026-10-18T02:00:00Z"
+      }
+    },
+    {
+      "table": "inventory_snapshots",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000804",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "sku_id": "P0004-20L",
+        "available_qty": 0,
+        "source_version": 1,
+        "observed_at": "2026-10-18T02:00:00Z"
+      }
+    },
+    {
+      "table": "inventory_snapshots",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000805",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "sku_id": "P0005-700",
+        "available_qty": 60,
+        "source_version": 1,
+        "observed_at": "2026-10-18T02:00:00Z"
+      }
+    },
+    {
+      "table": "inventory_snapshots",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000806",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "sku_id": "P0006-M",
+        "available_qty": 24,
+        "source_version": 1,
+        "observed_at": "2026-10-18T02:00:00Z"
+      }
+    },
+    {
+      "table": "orders",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000701",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "platform": "sandbox",
+        "order_no": "DEMO-2026-0001",
+        "buyer_id": "11111111-1111-4111-8111-000000000b01",
+        "status": "paid",
+        "paid_at": "2026-10-16T09:30:00Z",
+        "paid_amount_minor": 35900,
+        "currency": "CNY",
+        "shipped_at": null,
+        "delivered_at": null
+      }
+    },
+    {
+      "table": "orders",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000702",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "platform": "sandbox",
+        "order_no": "DEMO-2026-0002",
+        "buyer_id": "11111111-1111-4111-8111-000000000b02",
+        "status": "shipped",
+        "paid_at": "2026-10-12T14:20:00Z",
+        "paid_amount_minor": 9800,
+        "currency": "CNY",
+        "shipped_at": "2026-10-13T08:00:00Z",
+        "delivered_at": null
+      }
+    },
+    {
+      "table": "orders",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000703",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "platform": "sandbox",
+        "order_no": "DEMO-2026-0003",
+        "buyer_id": "11111111-1111-4111-8111-000000000b01",
+        "status": "delivered",
+        "paid_at": "2026-10-08T11:05:00Z",
+        "paid_amount_minor": 19900,
+        "currency": "CNY",
+        "shipped_at": "2026-10-09T08:30:00Z",
+        "delivered_at": "2026-10-11T16:45:00Z"
+      }
+    },
+    {
+      "table": "orders",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000704",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "platform": "sandbox",
+        "order_no": "DEMO-2026-0004",
+        "buyer_id": "11111111-1111-4111-8111-000000000b02",
+        "status": "delivered",
+        "paid_at": "2026-09-30T10:00:00Z",
+        "paid_amount_minor": 12900,
+        "currency": "CNY",
+        "shipped_at": "2026-10-01T09:00:00Z",
+        "delivered_at": "2026-10-05T13:20:00Z"
+      }
+    },
+    {
+      "table": "orders",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000705",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "platform": "sandbox",
+        "order_no": "DEMO-2026-0005",
+        "buyer_id": "11111111-1111-4111-8111-000000000b01",
+        "status": "completed",
+        "paid_at": "2026-09-05T15:40:00Z",
+        "paid_amount_minor": 3900,
+        "currency": "CNY",
+        "shipped_at": "2026-09-06T09:10:00Z",
+        "delivered_at": "2026-09-10T10:00:00Z"
+      }
+    },
+    {
+      "table": "orders",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000706",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "platform": "sandbox",
+        "order_no": "DEMO-2026-0006",
+        "buyer_id": "11111111-1111-4111-8111-000000000b02",
+        "status": "cancelled",
+        "paid_at": null,
+        "paid_amount_minor": 8900,
+        "currency": "CNY",
+        "shipped_at": null,
+        "delivered_at": null
+      }
+    },
+    {
+      "table": "order_items",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000601",
+        "tenant_id": "demo",
+        "order_id": "11111111-1111-4111-8111-000000000701",
+        "sku_id": "P0001-42",
+        "product_id": "P0001",
+        "quantity": 1,
+        "paid_amount_minor": 35900,
+        "title_snapshot": "栖家 客厅 LED 吸顶灯 简约款",
+        "brand_snapshot": "栖家",
+        "category_snapshot": "吸顶灯",
+        "specs_snapshot": {
+          "size": "42",
+          "尺寸单位": "厘米"
+        }
+      }
+    },
+    {
+      "table": "order_items",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000602",
+        "tenant_id": "demo",
+        "order_id": "11111111-1111-4111-8111-000000000702",
+        "sku_id": "P0002-F",
+        "product_id": "P0002",
+        "quantity": 2,
+        "paid_amount_minor": 9800,
+        "title_snapshot": "栖家 卧室 LED 壁灯 双只装",
+        "brand_snapshot": "栖家",
+        "category_snapshot": "壁灯",
+        "specs_snapshot": {
+          "size": "40",
+          "尺寸单位": "厘米"
+        }
+      }
+    },
+    {
+      "table": "order_items",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000603",
+        "tenant_id": "demo",
+        "order_id": "11111111-1111-4111-8111-000000000703",
+        "sku_id": "P0003-M",
+        "product_id": "P0003",
+        "quantity": 1,
+        "paid_amount_minor": 19900,
+        "title_snapshot": "栖家 餐厅 LED 吊灯 简约款",
+        "brand_snapshot": "栖家",
+        "category_snapshot": "吊灯",
+        "specs_snapshot": {
+          "size": "40",
+          "尺寸单位": "厘米"
+        }
+      }
+    },
+    {
+      "table": "order_items",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000604",
+        "tenant_id": "demo",
+        "order_id": "11111111-1111-4111-8111-000000000704",
+        "sku_id": "P0004-20L",
+        "product_id": "P0004",
+        "quantity": 1,
+        "paid_amount_minor": 12900,
+        "title_snapshot": "明居 餐厅 LED 装饰吊灯",
+        "brand_snapshot": "明居",
+        "category_snapshot": "吊灯",
+        "specs_snapshot": {
+          "size": "40",
+          "尺寸单位": "厘米"
+        }
+      }
+    },
+    {
+      "table": "order_items",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000605",
+        "tenant_id": "demo",
+        "order_id": "11111111-1111-4111-8111-000000000705",
+        "sku_id": "P0005-700",
+        "product_id": "P0005",
+        "quantity": 1,
+        "paid_amount_minor": 3900,
+        "title_snapshot": "明居 玄关 LED 感应灯",
+        "brand_snapshot": "明居",
+        "category_snapshot": "感应灯",
+        "specs_snapshot": {
+          "size": "40",
+          "尺寸单位": "厘米"
+        }
+      }
+    },
+    {
+      "table": "order_items",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000606",
+        "tenant_id": "demo",
+        "order_id": "11111111-1111-4111-8111-000000000706",
+        "sku_id": "P0006-M",
+        "product_id": "P0006",
+        "quantity": 1,
+        "paid_amount_minor": 8900,
+        "title_snapshot": "明居 阳台 LED 筒灯",
+        "brand_snapshot": "明居",
+        "category_snapshot": "筒灯",
+        "specs_snapshot": {
+          "size": "40",
+          "尺寸单位": "厘米"
+        }
+      }
+    },
+    {
+      "table": "reviews",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000501",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "product_id": "P0001",
+        "rating": 5,
+        "content": "灯具外观与图片一致，包装完好。",
+        "buyer_ref": "anon-01"
+      }
+    },
+    {
+      "table": "reviews",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000502",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "product_id": "P0003",
+        "rating": 4,
+        "content": "灯具外观与图片一致，包装完好。",
+        "buyer_ref": "anon-02"
+      }
+    },
+    {
+      "table": "reviews",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000503",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "product_id": "P0005",
+        "rating": 3,
+        "content": "灯具外观与图片一致，包装完好。",
+        "buyer_ref": "anon-03"
+      }
+    },
+    {
+      "table": "policy_documents",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000401",
+        "tenant_id": "demo",
+        "doc_id": "after-sale-demo-v2",
+        "title": "演示退换货政策 V2",
+        "scope": "after_sale",
+        "source": "运营导入",
+        "description": "沙箱自动售后政策 V2：未发货秒退、已签收退货退款需凭证、超时限拒绝。"
+      }
+    },
+    {
+      "table": "policy_versions",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000402",
+        "tenant_id": "demo",
+        "policy_document_id": "11111111-1111-4111-8111-000000000401",
+        "scope": "after_sale",
+        "version": "demo-v2",
+        "status": "published",
+        "effective_from": "2026-09-01T00:00:00Z",
+        "effective_to": null,
+        "checksum": "569ae057188d8f557cfc031f0c7497092975b3e6ab6a48f4afdf0cc4fe2fea8d",
+        "index_version": "keyword-demo-v2",
+        "published_at": "2026-09-01T10:00:00Z",
+        "published_by": "11111111-1111-4111-8111-000000000b05",
+        "automation_rules": {
+          "rules": [
+            {
+              "case_type": "refund",
+              "order_statuses": [
+                "paid"
+              ],
+              "max_days_since_payment": 14,
+              "max_amount_minor": 50000,
+              "require_evidence": false
+            },
+            {
+              "case_type": "return_refund",
+              "order_statuses": [
+                "delivered",
+                "completed"
+              ],
+              "max_days_since_payment": 14,
+              "max_amount_minor": 50000,
+              "require_evidence": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "table": "policy_chunks",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000403",
+        "tenant_id": "demo",
+        "policy_version_id": "11111111-1111-4111-8111-000000000402",
+        "chunk_index": 0,
+        "section_title": "退货换货",
+        "content": "沙箱自动售后政策 V2：支付后 14 天内、订单明细实付不超过 50000 分且未发货的已支付订单，可自动申请退款，无需额外凭证；已签收或已完成订单可提交退货退款，须上传与订单号及明细实付金额一致的原始凭证。系统仅创建售后单，不代表退款或退货已完成。换货自动执行暂未开放；目标尺寸缺货时可查询同品牌替代款。",
+        "char_start": 0,
+        "char_end": 153,
+        "content_hash": "569ae057188d8f557cfc031f0c7497092975b3e6ab6a48f4afdf0cc4fe2fea8d"
+      }
+    },
+    {
+      "table": "after_sale_cases",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000301",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "case_no": "AS-2026-0001",
+        "order_id": "11111111-1111-4111-8111-000000000701",
+        "order_item_id": "11111111-1111-4111-8111-000000000601",
+        "buyer_id": "11111111-1111-4111-8111-000000000b01",
+        "case_type": "refund",
+        "reason": "下错尺寸，想退款重新拍 41 厘米",
+        "status": "SUBMITTED",
+        "policy_version": "demo-v2",
+        "version": 1,
+        "external_case_id": null,
+        "actor_id": "11111111-1111-4111-8111-000000000b01",
+        "operation": "submit_case",
+        "idempotency_key": "idem-2026-0001",
+        "request_hash": "aa01aa01aa01aa01aa01aa01aa01aa01aa01aa01aa01aa01aa01aa01aa01aa01",
+        "draft": {
+          "basis": "未发货已支付订单，支付后 14 天内、金额 35900 分未超限，自动退款符合政策",
+          "suggested_action": "auto_refund",
+          "missing_materials": []
+        },
+        "evidence_ids": [],
+        "reviewer_id": null,
+        "review_comment": null,
+        "reviewed_at": null,
+        "last_error": null
+      }
+    },
+    {
+      "table": "after_sale_cases",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000302",
+        "tenant_id": "demo",
+        "shop_id": "shop-a",
+        "case_no": "AS-2026-0002",
+        "order_id": "11111111-1111-4111-8111-000000000703",
+        "order_item_id": "11111111-1111-4111-8111-000000000603",
+        "buyer_id": "11111111-1111-4111-8111-000000000b01",
+        "case_type": "return_refund",
+        "reason": "餐厅吊灯颜色与页面图片差异较大，申请退货退款",
+        "status": "REVIEWING",
+        "policy_version": "demo-v2",
+        "version": 2,
+        "external_case_id": null,
+        "actor_id": "11111111-1111-4111-8111-000000000b01",
+        "operation": "submit_case",
+        "idempotency_key": "idem-2026-0002",
+        "request_hash": "bb02bb02bb02bb02bb02bb02bb02bb02bb02bb02bb02bb02bb02bb02bb02bb02",
+        "draft": {
+          "basis": "已签收订单，退货退款须凭证；凭证金额与订单明细一致",
+          "suggested_action": "return_and_refund",
+          "missing_materials": [],
+          "return_address": "沙箱退货仓 A-1024"
+        },
+        "evidence_ids": [
+          "11111111-1111-4111-8111-000000000e01"
+        ],
+        "reviewer_id": "11111111-1111-4111-8111-000000000b03",
+        "review_comment": "凭证核对通过，等待客服终审",
+        "reviewed_at": "2026-10-15T06:30:00Z",
+        "last_error": null
+      }
+    },
+    {
+      "table": "after_sale_cases",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000303",
+        "tenant_id": "demo",
+        "shop_id": "shop-b",
+        "case_no": "AS-2026-0003",
+        "order_id": "11111111-1111-4111-8111-000000000705",
+        "order_item_id": "11111111-1111-4111-8111-000000000605",
+        "buyer_id": "11111111-1111-4111-8111-000000000b01",
+        "case_type": "return_refund",
+        "reason": "玄关灯盖子漏水，想退货",
+        "status": "REJECTED",
+        "policy_version": "demo-v2",
+        "version": 3,
+        "external_case_id": null,
+        "actor_id": "11111111-1111-4111-8111-000000000b01",
+        "operation": "submit_case",
+        "idempotency_key": "idem-2026-0003",
+        "request_hash": "cc03cc03cc03cc03cc03cc03cc03cc03cc03cc03cc03cc03cc03cc03cc03cc03",
+        "draft": {
+          "basis": "提交时距支付已超过 14 天时限",
+          "suggested_action": "reject_with_explanation",
+          "missing_materials": []
+        },
+        "evidence_ids": [
+          "11111111-1111-4111-8111-000000000e02"
+        ],
+        "reviewer_id": "11111111-1111-4111-8111-000000000b03",
+        "review_comment": "距支付已超 14 天，不在政策受理范围内，可走平台人工客服通道",
+        "reviewed_at": "2026-10-16T03:00:00Z",
+        "last_error": null
+      }
+    },
+    {
+      "table": "evidence_objects",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000e01",
+        "tenant_id": "demo",
+        "owner_id": "11111111-1111-4111-8111-000000000b01",
+        "kind": "refund_evidence",
+        "object_key": "evidence/demo/11111111-1111-4111-8111-000000000b01/receipt-0003.png",
+        "file_name": "订单截图.png",
+        "content_type": "image/png",
+        "size_bytes": 248320,
+        "status": "extracted",
+        "case_id": "11111111-1111-4111-8111-000000000302",
+        "extracted": {
+          "fields": [
+            {
+              "field_name": "order_no",
+              "value": "DEMO-2026-0003",
+              "status": "confirmed",
+              "source": "ocr",
+              "model_version": "vision-demo-1"
+            },
+            {
+              "field_name": "paid_amount_minor",
+              "value": 19900,
+              "status": "confirmed",
+              "source": "ocr",
+              "model_version": "vision-demo-1"
+            }
+          ],
+          "verification": {
+            "status": "matched",
+            "checked_at": "2026-10-14T09:20:00Z",
+            "order_item_id": "11111111-1111-4111-8111-000000000603"
+          }
+        }
+      }
+    },
+    {
+      "table": "evidence_objects",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000e02",
+        "tenant_id": "demo",
+        "owner_id": "11111111-1111-4111-8111-000000000b01",
+        "kind": "refund_evidence",
+        "object_key": "evidence/demo/11111111-1111-4111-8111-000000000b01/leak-0005.jpg",
+        "file_name": "玄关灯漏水照片.jpg",
+        "content_type": "image/jpeg",
+        "size_bytes": 1048576,
+        "status": "extracted",
+        "case_id": "11111111-1111-4111-8111-000000000303",
+        "extracted": {
+          "fields": [
+            {
+              "field_name": "order_no",
+              "value": "DEMO-2026-0005",
+              "status": "confirmed",
+              "source": "ocr",
+              "model_version": "vision-demo-1"
+            },
+            {
+              "field_name": "paid_amount_minor",
+              "value": 3900,
+              "status": "confirmed",
+              "source": "ocr",
+              "model_version": "vision-demo-1"
+            }
+          ],
+          "verification": {
+            "status": "matched",
+            "checked_at": "2026-10-16T02:10:00Z",
+            "order_item_id": "11111111-1111-4111-8111-000000000605"
+          }
+        }
+      }
+    },
+    {
+      "table": "refund_items",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000f01",
+        "tenant_id": "demo",
+        "order_item_id": "11111111-1111-4111-8111-000000000602",
+        "refund_qty": 1,
+        "refund_amount_minor": 4900,
+        "status": "completed",
+        "completed_at": "2026-10-14T07:00:00Z",
+        "reason": "多拍了一组，部分退款"
+      }
+    },
+    {
+      "table": "refund_items",
+      "data": {
+        "id": "11111111-1111-4111-8111-000000000f02",
+        "tenant_id": "demo",
+        "order_item_id": "11111111-1111-4111-8111-000000000604",
+        "refund_qty": 1,
+        "refund_amount_minor": 12900,
+        "status": "completed",
+        "completed_at": "2026-10-10T05:30:00Z",
+        "reason": "装饰吊灯色差，整单退货退款已完成"
+      }
+    }
+  ]
+}

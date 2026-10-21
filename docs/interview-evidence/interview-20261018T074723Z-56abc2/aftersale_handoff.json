@@ -1,0 +1,63 @@
+{
+  "request": {
+    "conversation_id": "b318ef9c-8d9e-476d-bf8b-b2e2aa0c8d11",
+    "client_message_id": "7124bc7daa7a4146a241a4e047a888ba",
+    "message": "这双鞋太小，能换42码吗？没货就推荐同品牌替代款。",
+    "order_item_id": "a444e88a-79e2-4455-badd-0bd7c43bcd95",
+    "target_size": "42",
+    "budget_minor": 50000
+  },
+  "events": [
+    {
+      "event": "message.accepted",
+      "elapsed_ms": 8,
+      "data": {
+        "event_id": "cf6835ef09414984999229a3efda2524",
+        "trace_id": "4a11d6545cb94682",
+        "client_message_id": "7124bc7daa7a4146a241a4e047a888ba"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 1742,
+      "data": {
+        "event_id": "18eac4b92d7d4a129511af2fd0051c3f",
+        "trace_id": "4a11d6545cb94682",
+        "agent": "aftersale",
+        "tool": "get_owned_order",
+        "duration_ms": 9,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 2544,
+      "data": {
+        "event_id": "a9b7beb7826a4ddca25352ad9d27bf65",
+        "trace_id": "4a11d6545cb94682",
+        "agent": "aftersale",
+        "tool": "check_inventory",
+        "duration_ms": 7,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "error",
+      "elapsed_ms": 7604,
+      "data": {
+        "event_id": "f63494bc0b0643eea52cf10ececfbe39",
+        "trace_id": "4a11d6545cb94682",
+        "message": "模型调用失败，请稍后重试",
+        "error_code": "workflow_failed",
+        "retryable": true
+      }
+    }
+  ],
+  "answer": null,
+  "latency_ms": 7615,
+  "first_delta_ms": null,
+  "true_model_routing": false,
+  "passed": false,
+  "name": "aftersale_handoff",
+  "wall_ms": 7634
+}

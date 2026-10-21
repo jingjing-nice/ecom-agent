@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "locked_at": "2026-10-18T14:06:19.987944+00:00",
+  "datasets": {
+    "evidence_verification.jsonl": {
+      "sha256": "51eb8e8084218e05b1a02c584f7c9aade2ca5165cfe1f5cb1092e8d7cd91c159",
+      "cases": 17,
+      "mode": "offline"
+    },
+    "knowledge_pipeline.jsonl": {
+      "sha256": "265f37a46b3edba1a89697468171278c12cc76a16762ce179c46a38e2ddec84c",
+      "cases": 9,
+      "mode": "offline"
+    },
+    "plan_validation.jsonl": {
+      "sha256": "6fe12e7a384b786bec7942fd951031a1bcfeaeca4eedb3b412c8969bc63a8c6d",
+      "cases": 12,
+      "mode": "offline"
+    },
+    "policy_grounding.jsonl": {
+      "sha256": "218855031ed0dbf9855a6cb95514ab13ccacfc77e3396137cd66889b725338b1",
+      "cases": 5,
+      "mode": "live"
+    },
+    "routing.jsonl": {
+      "sha256": "4855c60034ac2f413e137384a89d7fdb1c95b522222d91dcadf5f9647e23736f",
+      "cases": 8,
+      "mode": "live"
+    },
+    "sql_benchmark.jsonl": {
+      "sha256": "2cceb9c872708d320a93aaf41e9150950e8b6973374e66b10dd00fb26a705c94",
+      "cases": 10,
+      "mode": "offline"
+    },
+    "sql_result_compare.jsonl": {
+      "sha256": "5c72ac896266765a6e590a5a39f467fb48a4bedfcc01d609f1418ed5f7d2f44e",
+      "cases": 10,
+      "mode": "live"
+    },
+    "state_machine.jsonl": {
+      "sha256": "6936d17b5a2c8684066c7d048500e6939453f574ecc98ca1c580069f6f1545ed",
+      "cases": 14,
+      "mode": "offline"
+    }
+  }
+}

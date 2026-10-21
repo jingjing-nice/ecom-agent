@@ -1,0 +1,167 @@
+{
+  "request": {
+    "conversation_id": "648a99dd-299b-4c15-8675-5c2f6125cae2",
+    "client_message_id": "119900ba8e5142a8b294f6ada04bbb4f",
+    "message": "按品类统计所有已支付订单明细的支付金额合计，金额单位为分，不限制时间。"
+  },
+  "events": [
+    {
+      "event": "message.accepted",
+      "elapsed_ms": 9,
+      "data": {
+        "event_id": "a3d477bff88444c6a72fd7488b71395b",
+        "trace_id": "50988de71f9b4bb1",
+        "client_message_id": "119900ba8e5142a8b294f6ada04bbb4f"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 4390,
+      "data": {
+        "event_id": "dd7ec006edfe4785ba67bc4f0ba3dd18",
+        "trace_id": "50988de71f9b4bb1",
+        "agent": "analytics",
+        "tool": "generate_sql",
+        "duration_ms": 2416,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 5198,
+      "data": {
+        "event_id": "52bcfc34d6bf426b8fddbb8918c483b4",
+        "trace_id": "50988de71f9b4bb1",
+        "agent": "analytics",
+        "tool": "execute_readonly",
+        "duration_ms": 48,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "answer.completed",
+      "elapsed_ms": 8321,
+      "data": {
+        "event_id": "bfdb957d2efc41e29d0eebe65936a628",
+        "trace_id": "50988de71f9b4bb1",
+        "agent": "analytics",
+        "message": "按品类统计授权店铺所有已支付订单明细的支付金额合计（单位：分），不限时间范围。",
+        "cards": [],
+        "evidence": [],
+        "handoff": null,
+        "pending_confirmation": false,
+        "data": {
+          "columns": [
+            "category",
+            "total_paid_amount_minor"
+          ],
+          "rows": [
+            {
+              "category": "跑鞋",
+              "total_paid_amount_minor": "95700"
+            }
+          ],
+          "row_count": 1,
+          "truncated": false,
+          "duration_ms": 47,
+          "data_as_of": "2026-10-18T12:19:25.507721+00:00",
+          "sql": "SELECT fact_order_items.category AS category, SUM(fact_order_items.paid_amount_minor) AS total_paid_amount_minor FROM fact_order_items AS fact_order_items WHERE fact_order_items.shop_id = 'interview-shop' GROUP BY fact_order_items.category ORDER BY total_paid_amount_minor DESC LIMIT 1000",
+          "metric_ids": [
+            "paid_amount"
+          ],
+          "explanation": "按品类统计授权店铺所有已支付订单明细的支付金额合计（单位：分），不限时间范围。",
+          "query_id": "50988de71f9b4bb1"
+        },
+        "trace": [
+          {
+            "agent": "analytics",
+            "tool": "generate_sql",
+            "duration_ms": 2416,
+            "status": "ok"
+          },
+          {
+            "agent": "analytics",
+            "tool": "execute_readonly",
+            "duration_ms": 48,
+            "status": "ok"
+          }
+        ],
+        "model_calls": 6,
+        "routing_mode": "langgraph_model",
+        "slot_sources": {}
+      }
+    }
+  ],
+  "answer": {
+    "event_id": "bfdb957d2efc41e29d0eebe65936a628",
+    "trace_id": "50988de71f9b4bb1",
+    "agent": "analytics",
+    "message": "按品类统计授权店铺所有已支付订单明细的支付金额合计（单位：分），不限时间范围。",
+    "cards": [],
+    "evidence": [],
+    "handoff": null,
+    "pending_confirmation": false,
+    "data": {
+      "columns": [
+        "category",
+        "total_paid_amount_minor"
+      ],
+      "rows": [
+        {
+          "category": "跑鞋",
+          "total_paid_amount_minor": "95700"
+        }
+      ],
+      "row_count": 1,
+      "truncated": false,
+      "duration_ms": 47,
+      "data_as_of": "2026-10-18T12:19:25.507721+00:00",
+      "sql": "SELECT fact_order_items.category AS category, SUM(fact_order_items.paid_amount_minor) AS total_paid_amount_minor FROM fact_order_items AS fact_order_items WHERE fact_order_items.shop_id = 'interview-shop' GROUP BY fact_order_items.category ORDER BY total_paid_amount_minor DESC LIMIT 1000",
+      "metric_ids": [
+        "paid_amount"
+      ],
+      "explanation": "按品类统计授权店铺所有已支付订单明细的支付金额合计（单位：分），不限时间范围。",
+      "query_id": "50988de71f9b4bb1"
+    },
+    "trace": [
+      {
+        "agent": "analytics",
+        "tool": "generate_sql",
+        "duration_ms": 2416,
+        "status": "ok"
+      },
+      {
+        "agent": "analytics",
+        "tool": "execute_readonly",
+        "duration_ms": 48,
+        "status": "ok"
+      }
+    ],
+    "model_calls": 6,
+    "routing_mode": "langgraph_model",
+    "slot_sources": {}
+  },
+  "latency_ms": 8322,
+  "first_delta_ms": null,
+  "true_model_routing": true,
+  "reference_sql": "SELECT category, SUM(paid_amount_minor) AS paid_amount_minor FROM fact_order_items GROUP BY category ORDER BY category",
+  "reference_result": {
+    "columns": [
+      "category",
+      "paid_amount_minor"
+    ],
+    "rows": [
+      {
+        "category": "跑鞋",
+        "paid_amount_minor": "95700"
+      }
+    ],
+    "row_count": 1,
+    "truncated": false,
+    "duration_ms": 34,
+    "data_as_of": "2026-10-18T12:19:25.507721+00:00"
+  },
+  "passed": true,
+  "name": "analytics_sql",
+  "wall_ms": 8459
+}

@@ -1,0 +1,12 @@
+{"case_id": "plan-001", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["paid_amount"], "dimensions": ["category"]}}, "expect": {"ok": true}}
+{"case_id": "plan-002", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["paid_amount"], "dimensions": ["brand"], "time_range": {"start": "2026-10-01T00:00:00+08:00", "end": "2026-10-08T00:00:00+08:00"}, "filters": {"category": "吸顶灯"}}}, "expect": {"ok": true, "normalized_plan_contains": "+00:00"}}
+{"case_id": "plan-003", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["paid_amount", "refund_amount"]}}, "expect": {"ok": false, "reason_contains": "不能混算"}}
+{"case_id": "plan-004", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["paid_amount"], "dimensions": ["region"]}}, "expect": {"ok": false, "reason_contains": "画像维度"}}
+{"case_id": "plan-005", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["paid_amount"], "dimensions": ["渠道"]}}, "expect": {"ok": false, "reason_contains": "未知维度"}}
+{"case_id": "plan-006", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["paid_orders"], "dimensions": ["category"]}}, "expect": {"ok": false, "reason_contains": "未开放维度"}}
+{"case_id": "plan-007", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["paid_units"], "dimensions": ["brand"]}}, "expect": {"ok": true}}
+{"case_id": "plan-008", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["paid_amount"], "filters": {"region": "华东"}}}, "expect": {"ok": false, "reason_contains": "过滤字段"}}
+{"case_id": "plan-009", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["net_revenue"]}}, "expect": {"ok": false, "reason_contains": "未开放指标"}}
+{"case_id": "plan-010", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["paid_amount"], "time_range": {"start": "2026-10-08T00:00:00+08:00", "end": "2026-10-01T00:00:00+08:00"}}}, "expect": {"ok": false, "reason_contains": "start < end"}}
+{"case_id": "plan-011", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["paid_amount"], "time_range": {"start": "2026-10-01", "end": "2026-10-08T00:00:00+08:00"}}}, "expect": {"ok": false, "reason_contains": "时区"}}
+{"case_id": "plan-012", "dimension": "plan_validation", "input": {"plan": {"metric_ids": ["refund_amount"], "dimensions": ["category"], "time_range": {"start": "2026-10-01T00:00:00Z", "end": "2026-10-18T00:00:00Z"}}}, "expect": {"ok": true}}

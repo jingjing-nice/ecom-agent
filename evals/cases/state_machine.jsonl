@@ -1,0 +1,14 @@
+{"case_id": "sm-001", "dimension": "state_machine", "input": {"from": "DRAFT", "to": "SUBMITTED"}, "expect": {"allowed": true}}
+{"case_id": "sm-002", "dimension": "state_machine", "input": {"from": "SUBMITTED", "to": "REVIEWING"}, "expect": {"allowed": true}}
+{"case_id": "sm-003", "dimension": "state_machine", "input": {"from": "REVIEWING", "to": "APPROVED"}, "expect": {"allowed": true}}
+{"case_id": "sm-004", "dimension": "state_machine", "input": {"from": "REVIEWING", "to": "REJECTED"}, "expect": {"allowed": true}}
+{"case_id": "sm-005", "dimension": "state_machine", "input": {"from": "NEED_MORE_INFO", "to": "REVIEWING"}, "expect": {"allowed": true}}
+{"case_id": "sm-006", "dimension": "state_machine", "input": {"from": "APPROVED", "to": "CREATING"}, "expect": {"allowed": true}}
+{"case_id": "sm-007", "dimension": "state_machine", "input": {"from": "CREATING", "to": "UNKNOWN"}, "expect": {"allowed": true}}
+{"case_id": "sm-008", "dimension": "state_machine", "input": {"from": "UNKNOWN", "to": "REVIEWING"}, "expect": {"allowed": true}}
+{"case_id": "sm-009", "dimension": "state_machine", "input": {"from": "UNKNOWN", "to": "CREATED"}, "expect": {"allowed": true}}
+{"case_id": "sm-010", "dimension": "state_machine", "input": {"from": "APPROVED", "to": "CREATED"}, "expect": {"allowed": false}}
+{"case_id": "sm-011", "dimension": "state_machine", "input": {"from": "CREATED", "to": "CANCELLED"}, "expect": {"allowed": false}}
+{"case_id": "sm-012", "dimension": "state_machine", "input": {"from": "REJECTED", "to": "REVIEWING"}, "expect": {"allowed": false}}
+{"case_id": "sm-013", "dimension": "state_machine", "input": {"from": "DRAFT", "to": "APPROVED"}, "expect": {"allowed": false}}
+{"case_id": "sm-014", "dimension": "state_machine", "input": {"from": "UNKNOWN", "to": "CANCELLED"}, "expect": {"allowed": false}}

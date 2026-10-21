@@ -1,0 +1,74 @@
+# ============================================================
+# 电商智能客服与运营平台 — 直接依赖
+# 说明：版本约束为兼容范围，安装完成后用 `pip freeze` 生成
+# requirements.lock 作为可复现锁文件。
+# 建议 Python 3.12。
+# ============================================================
+
+# --- Web 框架 ---
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+sse-starlette>=2.1
+
+# --- 配置与校验 ---
+pydantic>=2.8
+pydantic-settings>=2.4
+orjson>=3.10
+
+# --- 数据库（业务库：PostgreSQL + pgvector） ---
+sqlalchemy[asyncio]>=2.0.32
+asyncpg>=0.29
+alembic>=1.13
+psycopg2-binary>=2.9
+pgvector>=0.3.5
+greenlet>=3.0
+
+# --- Redis ---
+redis>=5.0
+
+# --- Neo4j ---
+neo4j>=5.24
+
+# --- 对象存储 ---
+minio>=7.2
+
+# --- 模型网关（LangChain：模型/工具/结构化输出；LangGraph：路由/状态/人工审批/恢复） ---
+openai>=1.40
+langgraph>=1,<2
+langchain-core>=1,<2
+langchain>=1,<2
+langchain-text-splitters>=1.1.3,<2
+# ChatDeepSeek：网关的 Chat 传输层（密钥仍只由网关持有）
+langchain-deepseek>=1,<2
+# ChatOpenAI/OpenAIEmbeddings：视觉与 Embedding 的官方传输层（网关内使用，不直连 SDK）
+langchain-openai>=1,<2
+# AsyncRedisSaver 跨进程检查点（需 redis-stack 提供 RediSearch/RedisJSON）
+langgraph-checkpoint-redis>=0.5,<1
+# AsyncPostgresSaver 检查点（CHECKPOINT_BACKEND=postgres，复用业务库，psycopg3）
+langgraph-checkpoint-postgres>=3,<4
+psycopg[binary,pool]>=3.2,<4
+
+# --- 认证 ---
+PyJWT>=2.9
+bcrypt>=4.2
+
+# --- NL2SQL / SQL AST 校验 ---
+sqlglot>=25.0
+
+# --- 检索 ---
+jieba>=0.42.1
+numpy>=1.26
+
+# --- 文件与图像 ---
+pillow>=10.4
+filetype>=1.2
+
+# --- 通用工具 ---
+loguru>=0.7
+tenacity>=8.5
+httpx>=0.27
+
+# --- 测试 ---
+pytest>=8.3
+pytest-asyncio>=0.24

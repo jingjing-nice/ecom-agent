@@ -1,0 +1,10 @@
+{"case_id": "sqlcmp-paid_amount", "dimension": "sql_result_compare", "question": "统计 2026-10-01 00:00 至 2026-10-18 00:00（UTC）各品类的支付金额（分），按金额降序", "metric_id": "paid_amount"}
+{"case_id": "sqlcmp-paid_units", "dimension": "sql_result_compare", "question": "统计 2026-10-01 00:00 至 2026-10-18 00:00（UTC）各品类的支付件数，按件数降序", "metric_id": "paid_units"}
+{"case_id": "sqlcmp-paid_orders", "dimension": "sql_result_compare", "question": "统计 2026-10-01 00:00 至 2026-10-18 00:00（UTC）的支付订单数（去重）", "metric_id": "paid_orders"}
+{"case_id": "sqlcmp-avg_order_value", "dimension": "sql_result_compare", "question": "统计 2026-10-01 00:00 至 2026-10-18 00:00（UTC）的客单价（支付金额除以支付订单数，分为单位）", "metric_id": "avg_order_value"}
+{"case_id": "sqlcmp-refund_amount", "dimension": "sql_result_compare", "question": "统计 2026-10-01 00:00 至 2026-10-18 00:00（UTC）按退款完成时间归集的各品类退款金额（分），降序", "metric_id": "refund_amount"}
+{"case_id": "sqlcmp-refund_units", "dimension": "sql_result_compare", "question": "统计 2026-10-01 00:00 至 2026-10-18 00:00（UTC）按退款完成时间归集的各品类退款件数，降序", "metric_id": "refund_units"}
+{"case_id": "sqlcmp-product_sales_rank", "dimension": "sql_result_compare", "question": "统计 2026-10-01 00:00 至 2026-10-18 00:00（UTC）商品销量排名（含零销量商品），按件数降序取前 10", "metric_id": "product_sales_rank"}
+{"case_id": "sqlcmp-category_sales_rank", "dimension": "sql_result_compare", "question": "统计 2026-10-01 00:00 至 2026-10-18 00:00（UTC）品类销量排名（含零销量品类），按件数降序取前 10", "metric_id": "category_sales_rank"}
+{"case_id": "sqlcmp-available_inventory", "dimension": "sql_result_compare", "question": "统计当前各品类的可售库存合计，按库存降序", "metric_id": "available_inventory"}
+{"case_id": "sqlcmp-low_stock_skus", "dimension": "sql_result_compare", "question": "列出可用库存低于 10 的可售 SKU（含 sku_id、标题与可用库存），按库存升序", "metric_id": "low_stock_skus"}

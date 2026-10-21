@@ -1,0 +1,251 @@
+{
+  "request": {
+    "conversation_id": "7644aa81-960a-469c-bf9a-3cd42fa2a2f4",
+    "client_message_id": "32bed14217074a838d87b4f0b01ac8fa",
+    "message": "请先识别这张图的商品品类，再推荐500元以内的同品类可售商品，不要求同品牌同款。",
+    "image_id": "c6dc4706-0987-4245-852b-e8cae98531f1",
+    "budget_minor": 50000
+  },
+  "events": [
+    {
+      "event": "message.accepted",
+      "elapsed_ms": 17,
+      "data": {
+        "event_id": "0ca842a5a9ad4245863730b5897e4945",
+        "trace_id": "8f5ff36502dd48d6",
+        "client_message_id": "32bed14217074a838d87b4f0b01ac8fa"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 2141,
+      "data": {
+        "event_id": "65f82ace45094fa8aec7a5e3dfade1e9",
+        "trace_id": "8f5ff36502dd48d6",
+        "agent": "shopping",
+        "tool": "recognize_product",
+        "duration_ms": 6,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 3666,
+      "data": {
+        "event_id": "7f5b846ae95740baac369c8ea005eb19",
+        "trace_id": "8f5ff36502dd48d6",
+        "agent": "shopping",
+        "tool": "search_products",
+        "duration_ms": 574,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "answer.completed",
+      "elapsed_ms": 8788,
+      "data": {
+        "event_id": "bc4b15958c0f4c29a370f2cc33dc2ce5",
+        "trace_id": "8f5ff36502dd48d6",
+        "agent": "shopping",
+        "message": "以下是符合条件的可售商品，价格与库存来自沙箱快照。",
+        "cards": [
+          {
+            "product_id": "INTERVIEW-P5",
+            "sku_id": "INTERVIEW-P5-41",
+            "title": "面试演示品牌 拖鞋 5",
+            "brand": "面试演示品牌",
+            "category": "拖鞋",
+            "specs": {
+              "size": "41"
+            },
+            "price_minor": 3980,
+            "currency": "CNY",
+            "available_qty": 20,
+            "observed_at": "2026-10-18T12:19:25.507721+00:00",
+            "url": "/products/INTERVIEW-P5",
+            "source": "sandbox_catalog",
+            "retrieval": {
+              "rrf_score": 0.01639344262295082,
+              "sources": [
+                "keyword"
+              ]
+            }
+          },
+          {
+            "product_id": "INTERVIEW-P6",
+            "sku_id": "INTERVIEW-P6-41",
+            "title": "面试演示品牌 拖鞋 6",
+            "brand": "面试演示品牌",
+            "category": "拖鞋",
+            "specs": {
+              "size": "41"
+            },
+            "price_minor": 5980,
+            "currency": "CNY",
+            "available_qty": 20,
+            "observed_at": "2026-10-18T12:19:25.507721+00:00",
+            "url": "/products/INTERVIEW-P6",
+            "source": "sandbox_catalog",
+            "retrieval": {
+              "rrf_score": 0.016129032258064516,
+              "sources": [
+                "keyword"
+              ]
+            }
+          }
+        ],
+        "evidence": [],
+        "handoff": null,
+        "pending_confirmation": false,
+        "data": null,
+        "trace": [
+          {
+            "agent": "shopping",
+            "tool": "recognize_product",
+            "duration_ms": 6,
+            "status": "ok"
+          },
+          {
+            "agent": "shopping",
+            "tool": "search_products",
+            "duration_ms": 574,
+            "status": "ok"
+          }
+        ],
+        "model_calls": 5,
+        "routing_mode": "langgraph_model",
+        "slot_sources": {
+          "budget_minor": {
+            "value": 50000,
+            "source": "payload"
+          },
+          "image_id": {
+            "value": "c6dc4706-0987-4245-852b-e8cae98531f1",
+            "source": "payload"
+          }
+        }
+      }
+    }
+  ],
+  "answer": {
+    "event_id": "bc4b15958c0f4c29a370f2cc33dc2ce5",
+    "trace_id": "8f5ff36502dd48d6",
+    "agent": "shopping",
+    "message": "以下是符合条件的可售商品，价格与库存来自沙箱快照。",
+    "cards": [
+      {
+        "product_id": "INTERVIEW-P5",
+        "sku_id": "INTERVIEW-P5-41",
+        "title": "面试演示品牌 拖鞋 5",
+        "brand": "面试演示品牌",
+        "category": "拖鞋",
+        "specs": {
+          "size": "41"
+        },
+        "price_minor": 3980,
+        "currency": "CNY",
+        "available_qty": 20,
+        "observed_at": "2026-10-18T12:19:25.507721+00:00",
+        "url": "/products/INTERVIEW-P5",
+        "source": "sandbox_catalog",
+        "retrieval": {
+          "rrf_score": 0.01639344262295082,
+          "sources": [
+            "keyword"
+          ]
+        }
+      },
+      {
+        "product_id": "INTERVIEW-P6",
+        "sku_id": "INTERVIEW-P6-41",
+        "title": "面试演示品牌 拖鞋 6",
+        "brand": "面试演示品牌",
+        "category": "拖鞋",
+        "specs": {
+          "size": "41"
+        },
+        "price_minor": 5980,
+        "currency": "CNY",
+        "available_qty": 20,
+        "observed_at": "2026-10-18T12:19:25.507721+00:00",
+        "url": "/products/INTERVIEW-P6",
+        "source": "sandbox_catalog",
+        "retrieval": {
+          "rrf_score": 0.016129032258064516,
+          "sources": [
+            "keyword"
+          ]
+        }
+      }
+    ],
+    "evidence": [],
+    "handoff": null,
+    "pending_confirmation": false,
+    "data": null,
+    "trace": [
+      {
+        "agent": "shopping",
+        "tool": "recognize_product",
+        "duration_ms": 6,
+        "status": "ok"
+      },
+      {
+        "agent": "shopping",
+        "tool": "search_products",
+        "duration_ms": 574,
+        "status": "ok"
+      }
+    ],
+    "model_calls": 5,
+    "routing_mode": "langgraph_model",
+    "slot_sources": {
+      "budget_minor": {
+        "value": 50000,
+        "source": "payload"
+      },
+      "image_id": {
+        "value": "c6dc4706-0987-4245-852b-e8cae98531f1",
+        "source": "payload"
+      }
+    }
+  },
+  "latency_ms": 8790,
+  "first_delta_ms": null,
+  "true_model_routing": true,
+  "recognition": {
+    "id": "c6dc4706-0987-4245-852b-e8cae98531f1",
+    "status": "extracted",
+    "kind": "product_image",
+    "extracted": {
+      "color": "灰色",
+      "style": "室内防滑凉拖",
+      "mapping": {
+        "color": {
+          "raw": "灰色",
+          "mapped": null
+        }
+      },
+      "category": "拖鞋",
+      "visible_text": "41-51大码 踩屎感 THE 4CM HIGH COMFORT SOLE 日本大码踩屎感拖鞋男士夏室内居家用洗澡浴室防滑静音凉拖 ¥39.8 1000+人付款",
+      "model_version": "qwen3-vl-plus",
+      "vocab_version": "catalog-v1",
+      "source_image_id": "c6dc4706-0987-4245-852b-e8cae98531f1",
+      "unmapped_fields": [
+        "color"
+      ],
+      "uncertain_fields": [
+        "材质",
+        "品牌",
+        "精确型号"
+      ]
+    },
+    "job_id": "8c41fe21c15d471894e9d5047e9eb32e",
+    "error": null
+  },
+  "recognition_ms": 6860,
+  "total_ms": 15664,
+  "expected_category": "拖鞋",
+  "passed": true,
+  "name": "image_shopping",
+  "wall_ms": 15672
+}

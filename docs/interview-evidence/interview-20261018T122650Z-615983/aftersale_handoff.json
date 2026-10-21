@@ -1,0 +1,295 @@
+{
+  "request": {
+    "conversation_id": "92ea5b3c-b309-423b-a59b-ddcce6c97074",
+    "client_message_id": "baed7313c074438a8f75d87654dfebfd",
+    "message": "这双鞋太小，能换42码吗？没货就推荐同品牌替代款。",
+    "order_item_id": "ac92ecd6-f2f4-466d-925c-52329c006fa8",
+    "target_size": "42",
+    "budget_minor": 50000
+  },
+  "events": [
+    {
+      "event": "message.accepted",
+      "elapsed_ms": 12,
+      "data": {
+        "event_id": "0d57b85581284b3295360cf8d181d983",
+        "trace_id": "3321b7d9635443d9",
+        "client_message_id": "baed7313c074438a8f75d87654dfebfd"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 1887,
+      "data": {
+        "event_id": "3d074c21341b492281e6e4c20585d614",
+        "trace_id": "3321b7d9635443d9",
+        "agent": "aftersale",
+        "tool": "get_owned_order",
+        "duration_ms": 20,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 2892,
+      "data": {
+        "event_id": "6da556d128844b2a8bd475b232186ac6",
+        "trace_id": "3321b7d9635443d9",
+        "agent": "aftersale",
+        "tool": "check_inventory",
+        "duration_ms": 5,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 6130,
+      "data": {
+        "event_id": "94d61046dfe2485db1a4a9be3914fada",
+        "trace_id": "3321b7d9635443d9",
+        "agent": "aftersale",
+        "tool": "retrieve_policy",
+        "duration_ms": 1683,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 7893,
+      "data": {
+        "event_id": "f6d6cd839ebf474c9bcf882af03ecdb3",
+        "trace_id": "3321b7d9635443d9",
+        "agent": "shopping",
+        "tool": "search_products",
+        "duration_ms": 220,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "answer.completed",
+      "elapsed_ms": 10051,
+      "data": {
+        "event_id": "a79298289ee04bd18713398dcf0cb024",
+        "trace_id": "3321b7d9635443d9",
+        "agent": "aftersale",
+        "message": "目标尺码缺货时可推荐同品牌替代款（interview-v1，换货及退款规则） 已找到政策参考。提交申请并确认后，系统将按已发布的结构化规则自动核验；本次咨询不代表审核通过。 以下是符合条件的可售商品，价格与库存来自沙箱快照。",
+        "cards": [
+          {
+            "product_id": "INTERVIEW-P1",
+            "sku_id": "INTERVIEW-P1-42",
+            "title": "面试演示品牌 跑鞋 1",
+            "brand": "面试演示品牌",
+            "category": "跑鞋",
+            "specs": {
+              "size": "42"
+            },
+            "price_minor": 25900,
+            "currency": "CNY",
+            "available_qty": 20,
+            "observed_at": "2026-10-18T12:26:50.840760+00:00",
+            "url": "/products/INTERVIEW-P1",
+            "source": "sandbox_catalog",
+            "retrieval": {
+              "rrf_score": 0.01639344262295082,
+              "sources": [
+                "keyword"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "chunk_id": "4ceb8baf-031a-4cd5-b7c1-9a1d863106e8",
+            "policy_version_id": "bd56a84c-4676-491d-9d73-8d1aa38f9191",
+            "doc_id": "interview-policy",
+            "doc_title": "面试沙箱售后政策",
+            "version": "interview-v1",
+            "scope": "after_sale",
+            "section_title": "换货及退款规则",
+            "content": "换货政策：已签收商品可申请售后咨询。换货需核验本人订单、保持包装完整并确认目标尺码库存；目标尺码缺货时可推荐同品牌替代款。用户确认前不能创建换货单。未发货已支付订单在支付后14天内、实付不超过50000分可申请退款，系统仅创建沙箱售后单，不代表退款完成。",
+            "char_start": 0,
+            "char_end": 127,
+            "rrf_score": 0.016393,
+            "keyword_rank": 1,
+            "vector_rank": null,
+            "distance": null
+          }
+        ],
+        "handoff": {
+          "product_id": "INTERVIEW-P0",
+          "brand": "面试演示品牌",
+          "category": "跑鞋",
+          "budget_minor": 29900,
+          "target_size": "42",
+          "reason": "目标尺码缺货；换货资格待系统规则核验"
+        },
+        "pending_confirmation": true,
+        "data": null,
+        "trace": [
+          {
+            "agent": "aftersale",
+            "tool": "get_owned_order",
+            "duration_ms": 20,
+            "status": "ok"
+          },
+          {
+            "agent": "aftersale",
+            "tool": "check_inventory",
+            "duration_ms": 5,
+            "status": "ok"
+          },
+          {
+            "agent": "aftersale",
+            "tool": "retrieve_policy",
+            "duration_ms": 1683,
+            "status": "ok"
+          },
+          {
+            "agent": "shopping",
+            "tool": "search_products",
+            "duration_ms": 220,
+            "status": "ok"
+          }
+        ],
+        "model_calls": 7,
+        "routing_mode": "langgraph_model",
+        "slot_sources": {
+          "category": {
+            "value": "跑鞋",
+            "source": "handoff"
+          },
+          "budget_minor": {
+            "value": 29900,
+            "source": "handoff"
+          },
+          "brand": {
+            "value": "面试演示品牌",
+            "source": "handoff"
+          },
+          "target_size": {
+            "value": "42",
+            "source": "handoff"
+          },
+          "order_item_id": {
+            "value": "ac92ecd6-f2f4-466d-925c-52329c006fa8",
+            "source": "payload"
+          }
+        }
+      }
+    }
+  ],
+  "answer": {
+    "event_id": "a79298289ee04bd18713398dcf0cb024",
+    "trace_id": "3321b7d9635443d9",
+    "agent": "aftersale",
+    "message": "目标尺码缺货时可推荐同品牌替代款（interview-v1，换货及退款规则） 已找到政策参考。提交申请并确认后，系统将按已发布的结构化规则自动核验；本次咨询不代表审核通过。 以下是符合条件的可售商品，价格与库存来自沙箱快照。",
+    "cards": [
+      {
+        "product_id": "INTERVIEW-P1",
+        "sku_id": "INTERVIEW-P1-42",
+        "title": "面试演示品牌 跑鞋 1",
+        "brand": "面试演示品牌",
+        "category": "跑鞋",
+        "specs": {
+          "size": "42"
+        },
+        "price_minor": 25900,
+        "currency": "CNY",
+        "available_qty": 20,
+        "observed_at": "2026-10-18T12:26:50.840760+00:00",
+        "url": "/products/INTERVIEW-P1",
+        "source": "sandbox_catalog",
+        "retrieval": {
+          "rrf_score": 0.01639344262295082,
+          "sources": [
+            "keyword"
+          ]
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "chunk_id": "4ceb8baf-031a-4cd5-b7c1-9a1d863106e8",
+        "policy_version_id": "bd56a84c-4676-491d-9d73-8d1aa38f9191",
+        "doc_id": "interview-policy",
+        "doc_title": "面试沙箱售后政策",
+        "version": "interview-v1",
+        "scope": "after_sale",
+        "section_title": "换货及退款规则",
+        "content": "换货政策：已签收商品可申请售后咨询。换货需核验本人订单、保持包装完整并确认目标尺码库存；目标尺码缺货时可推荐同品牌替代款。用户确认前不能创建换货单。未发货已支付订单在支付后14天内、实付不超过50000分可申请退款，系统仅创建沙箱售后单，不代表退款完成。",
+        "char_start": 0,
+        "char_end": 127,
+        "rrf_score": 0.016393,
+        "keyword_rank": 1,
+        "vector_rank": null,
+        "distance": null
+      }
+    ],
+    "handoff": {
+      "product_id": "INTERVIEW-P0",
+      "brand": "面试演示品牌",
+      "category": "跑鞋",
+      "budget_minor": 29900,
+      "target_size": "42",
+      "reason": "目标尺码缺货；换货资格待系统规则核验"
+    },
+    "pending_confirmation": true,
+    "data": null,
+    "trace": [
+      {
+        "agent": "aftersale",
+        "tool": "get_owned_order",
+        "duration_ms": 20,
+        "status": "ok"
+      },
+      {
+        "agent": "aftersale",
+        "tool": "check_inventory",
+        "duration_ms": 5,
+        "status": "ok"
+      },
+      {
+        "agent": "aftersale",
+        "tool": "retrieve_policy",
+        "duration_ms": 1683,
+        "status": "ok"
+      },
+      {
+        "agent": "shopping",
+        "tool": "search_products",
+        "duration_ms": 220,
+        "status": "ok"
+      }
+    ],
+    "model_calls": 7,
+    "routing_mode": "langgraph_model",
+    "slot_sources": {
+      "category": {
+        "value": "跑鞋",
+        "source": "handoff"
+      },
+      "budget_minor": {
+        "value": 29900,
+        "source": "handoff"
+      },
+      "brand": {
+        "value": "面试演示品牌",
+        "source": "handoff"
+      },
+      "target_size": {
+        "value": "42",
+        "source": "handoff"
+      },
+      "order_item_id": {
+        "value": "ac92ecd6-f2f4-466d-925c-52329c006fa8",
+        "source": "payload"
+      }
+    }
+  },
+  "latency_ms": 10053,
+  "first_delta_ms": null,
+  "true_model_routing": true,
+  "passed": true,
+  "name": "aftersale_handoff",
+  "wall_ms": 10073
+}

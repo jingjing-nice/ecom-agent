@@ -1,0 +1,181 @@
+{
+  "passed": true,
+  "mode": "real PostgreSQL + real API + injected sandbox adapter; no real platform writes",
+  "supports_idempotency": true,
+  "stable_request_no": "REQ-ad6bfdad0b694168aaa58a06bac87552",
+  "calls": [
+    {
+      "operation": "create",
+      "request_no": "REQ-ad6bfdad0b694168aaa58a06bac87552",
+      "case_id": "ad6bfdad0b694168aaa58a06bac87552",
+      "outcome": "timeout"
+    },
+    {
+      "operation": "probe",
+      "request_no": "REQ-ad6bfdad0b694168aaa58a06bac87552",
+      "outcome": "missing"
+    },
+    {
+      "operation": "create",
+      "request_no": "REQ-ad6bfdad0b694168aaa58a06bac87552",
+      "case_id": "ad6bfdad0b694168aaa58a06bac87552",
+      "outcome": "created"
+    }
+  ],
+  "snapshots": [
+    {
+      "case": {
+        "id": "ad6bfdad-0b69-4168-aaa5-8a06bac87552",
+        "case_no": "AS-2dddaf4a9de1452486d7b27b6c1d234b",
+        "status": "UNKNOWN",
+        "version": 8,
+        "case_type": "refund",
+        "reason": "面试沙箱超时恢复演练",
+        "order_item_id": "596c1869-5ba7-4ff3-90c4-263d96269c1d",
+        "policy_version": "interview-v1",
+        "draft": {
+          "message": "申请草稿，确认后由系统按已发布规则自动核验",
+          "review_mode": "automatic",
+          "requires_review": false,
+          "automatic_decision": {
+            "reason": "订单状态、期限、金额及所需凭证符合已发布规则，自动审核通过",
+            "status": "APPROVED",
+            "policy_id": "28df0669-d89b-4ead-ad83-cbb29e61a06b",
+            "rule_version": "automatic-policy-v1"
+          }
+        },
+        "external_case_id": null,
+        "review_comment": "订单状态、期限、金额及所需凭证符合已发布规则，自动审核通过",
+        "evidence_ids": [],
+        "appeal_path": null,
+        "last_error": "外部平台创建结果未知，将按稳定请求号核对"
+      },
+      "job": {
+        "job_id": "5448b2abf52f412a8568afd11b23521d",
+        "status": "pending",
+        "attempts": 1,
+        "error": "外部平台创建结果未知，将按稳定请求号核对",
+        "result": null,
+        "next_retry_at": "2026-10-18 12:23:36.222783+00:00"
+      },
+      "calls_so_far": [
+        {
+          "operation": "create",
+          "request_no": "REQ-ad6bfdad0b694168aaa58a06bac87552",
+          "case_id": "ad6bfdad0b694168aaa58a06bac87552",
+          "outcome": "timeout"
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "ad6bfdad-0b69-4168-aaa5-8a06bac87552",
+        "case_no": "AS-2dddaf4a9de1452486d7b27b6c1d234b",
+        "status": "APPROVED",
+        "version": 9,
+        "case_type": "refund",
+        "reason": "面试沙箱超时恢复演练",
+        "order_item_id": "596c1869-5ba7-4ff3-90c4-263d96269c1d",
+        "policy_version": "interview-v1",
+        "draft": {
+          "message": "申请草稿，确认后由系统按已发布规则自动核验",
+          "review_mode": "automatic",
+          "requires_review": false,
+          "automatic_decision": {
+            "reason": "订单状态、期限、金额及所需凭证符合已发布规则，自动审核通过",
+            "status": "APPROVED",
+            "policy_id": "28df0669-d89b-4ead-ad83-cbb29e61a06b",
+            "rule_version": "automatic-policy-v1"
+          }
+        },
+        "external_case_id": null,
+        "review_comment": "订单状态、期限、金额及所需凭证符合已发布规则，自动审核通过",
+        "evidence_ids": [],
+        "appeal_path": null,
+        "last_error": "核对未发现外部单，退回重新审批"
+      },
+      "job": {
+        "job_id": "5448b2abf52f412a8568afd11b23521d",
+        "status": "pending",
+        "attempts": 2,
+        "error": "核对未发现外部单，将重新核验政策后按同一请求号自动重试",
+        "result": null,
+        "next_retry_at": "2026-10-18 12:23:39.223379+00:00"
+      },
+      "calls_so_far": [
+        {
+          "operation": "create",
+          "request_no": "REQ-ad6bfdad0b694168aaa58a06bac87552",
+          "case_id": "ad6bfdad0b694168aaa58a06bac87552",
+          "outcome": "timeout"
+        },
+        {
+          "operation": "probe",
+          "request_no": "REQ-ad6bfdad0b694168aaa58a06bac87552",
+          "outcome": "missing"
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "ad6bfdad-0b69-4168-aaa5-8a06bac87552",
+        "case_no": "AS-2dddaf4a9de1452486d7b27b6c1d234b",
+        "status": "CREATED",
+        "version": 13,
+        "case_type": "refund",
+        "reason": "面试沙箱超时恢复演练",
+        "order_item_id": "596c1869-5ba7-4ff3-90c4-263d96269c1d",
+        "policy_version": "interview-v1",
+        "draft": {
+          "message": "申请草稿，确认后由系统按已发布规则自动核验",
+          "review_mode": "automatic",
+          "requires_review": false,
+          "automatic_decision": {
+            "reason": "订单状态、期限、金额及所需凭证符合已发布规则，自动审核通过",
+            "status": "APPROVED",
+            "policy_id": "28df0669-d89b-4ead-ad83-cbb29e61a06b",
+            "rule_version": "automatic-policy-v1"
+          }
+        },
+        "external_case_id": "SANDBOX-ad6bfdad0b694168aaa58a06bac87552",
+        "review_comment": "订单状态、期限、金额及所需凭证符合已发布规则，自动审核通过",
+        "evidence_ids": [],
+        "appeal_path": null,
+        "last_error": null
+      },
+      "job": {
+        "job_id": "5448b2abf52f412a8568afd11b23521d",
+        "status": "succeeded",
+        "attempts": 3,
+        "error": null,
+        "result": {
+          "external_case_id": "SANDBOX-ad6bfdad0b694168aaa58a06bac87552"
+        },
+        "next_retry_at": null
+      },
+      "calls_so_far": [
+        {
+          "operation": "create",
+          "request_no": "REQ-ad6bfdad0b694168aaa58a06bac87552",
+          "case_id": "ad6bfdad0b694168aaa58a06bac87552",
+          "outcome": "timeout"
+        },
+        {
+          "operation": "probe",
+          "request_no": "REQ-ad6bfdad0b694168aaa58a06bac87552",
+          "outcome": "missing"
+        },
+        {
+          "operation": "create",
+          "request_no": "REQ-ad6bfdad0b694168aaa58a06bac87552",
+          "case_id": "ad6bfdad0b694168aaa58a06bac87552",
+          "outcome": "created"
+        }
+      ]
+    }
+  ],
+  "outbox_status": "processed",
+  "explanation": "超时只说明未收到响应，不说明远端未创建。必须先按稳定请求号核对；有幂等保证且确认不存在才可重发，无幂等保证保持 UNKNOWN，不盲目创建。",
+  "name": "timeout_recovery",
+  "wall_ms": 5241
+}

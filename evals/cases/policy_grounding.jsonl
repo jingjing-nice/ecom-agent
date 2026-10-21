@@ -1,0 +1,5 @@
+{"case_id": "ground-001", "dimension": "policy_grounding", "role": "buyer", "message": "我想寄养宠物狗，这个售后怎么处理", "expect": {"refusal": true}}
+{"case_id": "ground-002", "dimension": "policy_grounding", "role": "buyer", "message": "海外国家配送的售后规则是什么", "expect": {"refusal": true}}
+{"case_id": "ground-003", "dimension": "policy_grounding", "role": "buyer", "message": "退货政策是怎么规定的", "expect": {"refusal": false, "agent": "aftersale"}}
+{"case_id": "ground-004", "dimension": "policy_grounding", "role": "buyer", "message": "换货运费由谁承担", "expect": {"refusal": false}}
+{"case_id": "ground-005", "dimension": "policy_grounding", "role": "buyer", "message": "退货需要几天内申请", "expect": {"refusal": false}}

@@ -1,0 +1,8 @@
+{"case_id": "route-001", "dimension": "routing", "role": "buyer", "message": "想买盏 500 元以内的吸顶灯", "expect": {"agent": "shopping"}}
+{"case_id": "route-002", "dimension": "routing", "role": "buyer", "message": "看看有没有适合客厅照明的壁灯", "expect": {"agent": "shopping"}}
+{"case_id": "route-003", "dimension": "routing", "role": "buyer", "message": "灯具尺寸太大了，想换小一号", "expect": {"agent": "aftersale"}}
+{"case_id": "route-004", "dimension": "routing", "role": "buyer", "message": "我要申请退款", "expect": {"agent": "aftersale"}}
+{"case_id": "route-005", "dimension": "routing", "role": "buyer", "message": "这盏灯退货怎么操作", "expect": {"agent": "aftersale"}}
+{"case_id": "route-006", "dimension": "routing", "role": "ops", "message": "统计各品类最近的支付金额", "expect": {"agent": "analytics"}}
+{"case_id": "route-007", "dimension": "routing", "role": "ops", "message": "看看商品销量排名", "expect": {"agent": "analytics"}}
+{"case_id": "route-008", "dimension": "routing", "role": "ops", "message": "哪些 SKU 库存低于阈值", "expect": {"agent": "analytics"}}

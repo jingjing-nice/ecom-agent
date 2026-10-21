@@ -1,0 +1,125 @@
+{
+  "request": {
+    "conversation_id": "67725d41-ef14-4c4d-95e5-3602d823a54d",
+    "client_message_id": "99ebdf97e70b4b59922dc8d9da16329d",
+    "message": "按品类统计所有已支付订单明细的支付金额合计，金额单位为分，不限制时间。"
+  },
+  "events": [
+    {
+      "event": "message.accepted",
+      "elapsed_ms": 5,
+      "data": {
+        "event_id": "c34733892ce849d38cb83bb44f24bb02",
+        "trace_id": "1a89aff79fa74f12",
+        "client_message_id": "99ebdf97e70b4b59922dc8d9da16329d"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 4054,
+      "data": {
+        "event_id": "4788045d2fe147b5ac04f58d11c9cf04",
+        "trace_id": "1a89aff79fa74f12",
+        "agent": "analytics",
+        "tool": "generate_sql",
+        "duration_ms": 143,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 7127,
+      "data": {
+        "event_id": "7d32075e12b64b9a95d9d945ffbcca36",
+        "trace_id": "1a89aff79fa74f12",
+        "agent": "analytics",
+        "tool": "generate_sql",
+        "duration_ms": 114,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "answer.completed",
+      "elapsed_ms": 30675,
+      "data": {
+        "event_id": "3ab6cbb548db42a4a90705cf6b5466e0",
+        "trace_id": "1a89aff79fa74f12",
+        "agent": "analytics",
+        "message": "查询未完成，请明确指标与时间范围或检查模型配置。",
+        "cards": [],
+        "evidence": [],
+        "handoff": null,
+        "pending_confirmation": false,
+        "data": null,
+        "trace": [
+          {
+            "agent": "analytics",
+            "tool": "generate_sql",
+            "duration_ms": 143,
+            "status": "ok"
+          },
+          {
+            "agent": "analytics",
+            "tool": "generate_sql",
+            "duration_ms": 114,
+            "status": "ok"
+          }
+        ],
+        "model_calls": 7,
+        "routing_mode": "langgraph_model",
+        "slot_sources": {}
+      }
+    }
+  ],
+  "answer": {
+    "event_id": "3ab6cbb548db42a4a90705cf6b5466e0",
+    "trace_id": "1a89aff79fa74f12",
+    "agent": "analytics",
+    "message": "查询未完成，请明确指标与时间范围或检查模型配置。",
+    "cards": [],
+    "evidence": [],
+    "handoff": null,
+    "pending_confirmation": false,
+    "data": null,
+    "trace": [
+      {
+        "agent": "analytics",
+        "tool": "generate_sql",
+        "duration_ms": 143,
+        "status": "ok"
+      },
+      {
+        "agent": "analytics",
+        "tool": "generate_sql",
+        "duration_ms": 114,
+        "status": "ok"
+      }
+    ],
+    "model_calls": 7,
+    "routing_mode": "langgraph_model",
+    "slot_sources": {}
+  },
+  "latency_ms": 30678,
+  "first_delta_ms": null,
+  "true_model_routing": true,
+  "reference_sql": "SELECT category, SUM(paid_amount_minor) AS paid_amount_minor FROM fact_order_items GROUP BY category ORDER BY category",
+  "reference_result": {
+    "columns": [
+      "category",
+      "paid_amount_minor"
+    ],
+    "rows": [
+      {
+        "category": "跑鞋",
+        "paid_amount_minor": "95700"
+      }
+    ],
+    "row_count": 1,
+    "truncated": false,
+    "duration_ms": 60,
+    "data_as_of": "2026-10-18T07:42:23.994192+00:00"
+  },
+  "passed": false,
+  "name": "analytics_sql",
+  "wall_ms": 30807
+}

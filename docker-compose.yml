@@ -1,0 +1,163 @@
+# ============================================================
+# 电商智能客服与运营平台 (ecom-agent) — 基础设施层
+# 包含：PostgreSQL 17 + pgvector / Redis / Neo4j / MinIO
+# 启动：docker compose up -d
+# 停止：docker compose down
+# 清数据：docker compose down -v
+#
+# 注意：本机 5432/6379/7474/7687/9000 已被其他项目占用，
+# 本平台统一使用偏移端口。业务与分析库位于同一实例，
+# 通过独立数据库 + 低权限账号隔离（个人版方案，真实试点再拆实例）。
+# ============================================================
+
+services:
+  web:
+    build: ./frontend
+    profiles: [app]
+    ports: ["5173:80"]
+    depends_on: [api]
+    networks: [ecom-net]
+  api:
+    build: .
+    profiles: [app]
+    env_file:
+      - path: .env
+        required: false
+    ports: ["8090:8090"]
+    environment: &app-env
+      DB_HOST: postgres
+      DB_PORT: 5432
+      ANALYTICS_DB_HOST: postgres
+      ANALYTICS_DB_PORT: 5432
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      # 检查点持久化：Redis Stack 可用（应用启动自检，失败报错）
+      CHECKPOINT_BACKEND: redis
+      NEO4J_URI: bolt://neo4j:7687
+      MINIO_ENDPOINT: minio:9000
+      JWT_SECRET: ${JWT_SECRET:-local-demo-change-this-secret-2026}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DASHSCOPE_API_KEY: ${DASHSCOPE_API_KEY:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [ecom-net]
+  worker:
+    build: .
+    profiles: [app]
+    command: ["python", "-m", "src.worker"]
+    env_file:
+      - path: .env
+        required: false
+    environment: *app-env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [ecom-net]
+
+
+  # ----------------------------------------------------------
+  # PostgreSQL 17 + pgvector — 业务事实库 + 向量检索 + 分析库
+  # 存储：商品、订单、售后、政策知识与向量、会话、任务、审计
+  # 端口：5433（宿主） -> 5432（容器）
+  # ----------------------------------------------------------
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: ecom-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ecom
+      POSTGRES_PASSWORD: ecom123
+      POSTGRES_DB: ecom_db
+    volumes:
+      - ./docker/postgres_data:/var/lib/postgresql/data
+      - ./docker/initdb:/docker-entrypoint-initdb.d
+    ports:
+      - "5433:5432"
+    networks:
+      - ecom-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ecom -d ecom_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ----------------------------------------------------------
+  # Redis Stack — 缓存、并发限流与 LangGraph 检查点（人工审批/恢复）
+  # 选用 redis-stack-server：提供 RediSearch/RedisJSON，AsyncRedisSaver 依赖
+  # 端口：6380（宿主） -> 6379（容器）
+  # ----------------------------------------------------------
+  redis:
+    image: redis/redis-stack-server:7.4.0-v8
+    container_name: ecom-redis
+    restart: always
+    environment:
+      REDIS_ARGS: "--appendonly yes"
+    volumes:
+      - ./docker/redis_data:/data
+    ports:
+      - "6380:6379"
+    networks:
+      - ecom-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ----------------------------------------------------------
+  # Neo4j 5 — 商品知识图谱（属性、搭配、替代、品牌关系）
+  # Web UI：http://localhost:7475  用户名/密码：neo4j/ecom123
+  # Bolt 端口：7688（宿主） -> 7687（容器）
+  # ----------------------------------------------------------
+  neo4j:
+    image: neo4j:5.26-community
+    container_name: ecom-neo4j
+    restart: always
+    environment:
+      NEO4J_AUTH: neo4j/ecom123
+      NEO4J_server_memory_heap_max__size: 1G
+    volumes:
+      - ./docker/neo4j_data:/data
+      - ./docker/neo4j_logs:/logs
+    ports:
+      - "7475:7474"   # Web UI
+      - "7688:7687"   # Bolt 协议
+    networks:
+      - ecom-net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:7474 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ----------------------------------------------------------
+  # MinIO — S3 兼容对象存储（商品图片、售后凭证）
+  # API 端口：9100，控制台端口：9101
+  # 控制台：http://localhost:9101  minioadmin/minioadmin
+  # ----------------------------------------------------------
+  minio:
+    build: ./docker/minio
+    image: ecom-minio:2025-04-22
+    container_name: ecom-minio
+    restart: always
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /minio_data --console-address ":9001"
+    volumes:
+      - ./docker/minio_data:/minio_data
+    ports:
+      - "9100:9000"
+      - "9101:9001"
+    networks:
+      - ecom-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+networks:
+  ecom-net:
+    driver: bridge

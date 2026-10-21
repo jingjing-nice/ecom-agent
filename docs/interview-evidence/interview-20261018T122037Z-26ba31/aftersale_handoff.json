@@ -1,0 +1,87 @@
+{
+  "request": {
+    "conversation_id": "63242d8b-a17e-45e3-872f-cbfcf258fd25",
+    "client_message_id": "df19a042ec3f4ed9ab67f94c382da0e5",
+    "message": "这双鞋太小，能换42码吗？没货就推荐同品牌替代款。",
+    "order_item_id": "326b3928-8707-43fc-ba17-fa479014d6cc",
+    "target_size": "42",
+    "budget_minor": 50000
+  },
+  "events": [
+    {
+      "event": "message.accepted",
+      "elapsed_ms": 9,
+      "data": {
+        "event_id": "7b955a16ac964cdc9d890fdae2a494df",
+        "trace_id": "f777b9239ba6481d",
+        "client_message_id": "df19a042ec3f4ed9ab67f94c382da0e5"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 1921,
+      "data": {
+        "event_id": "8f52912f7f034f5fbd4233f07ae4fd1e",
+        "trace_id": "f777b9239ba6481d",
+        "agent": "aftersale",
+        "tool": "get_owned_order",
+        "duration_ms": 20,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 2897,
+      "data": {
+        "event_id": "1ca28f7d7b064cb6824498812e3542ac",
+        "trace_id": "f777b9239ba6481d",
+        "agent": "aftersale",
+        "tool": "check_inventory",
+        "duration_ms": 7,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 5966,
+      "data": {
+        "event_id": "ea0bf20436734e62b8149cd1b1a38b5c",
+        "trace_id": "f777b9239ba6481d",
+        "agent": "aftersale",
+        "tool": "retrieve_policy",
+        "duration_ms": 1937,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "workflow.progress",
+      "elapsed_ms": 7340,
+      "data": {
+        "event_id": "02a097da318a479db118e99398a72ec4",
+        "trace_id": "f777b9239ba6481d",
+        "agent": "shopping",
+        "tool": "get_sku_facts",
+        "duration_ms": 15,
+        "status": "ok"
+      }
+    },
+    {
+      "event": "error",
+      "elapsed_ms": 8487,
+      "data": {
+        "event_id": "819b231a4e124441acd40b34efbd8b64",
+        "trace_id": "f777b9239ba6481d",
+        "message": "任务处理失败，请稍后重试",
+        "error_code": "internal_error",
+        "retryable": true
+      }
+    }
+  ],
+  "answer": null,
+  "latency_ms": 8490,
+  "first_delta_ms": null,
+  "true_model_routing": false,
+  "passed": false,
+  "name": "aftersale_handoff",
+  "wall_ms": 8501
+}
